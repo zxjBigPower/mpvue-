@@ -48,12 +48,18 @@
             </ul>
           </div>
       </div>
+      <!-- 导航菜单 -->
+      <div class="navBar" @touchstart="startTouch" @touchmove="moveTouch" @touchend="endTouch" :style="{top:navTop,left:navLeft}">
+
+        <img src="/static/img/menu.png" class="coin" alt="">
+      </div>
     </div>
     </div>
   </div>
 </template>
 
 <script>
+var app=getApp();
 import bmap from "./../../../static/libs/bmap-wx.js";
 export default {
   data() {
@@ -66,12 +72,15 @@ export default {
       },
       data: {
         current: {
-          pmdes:{}
+          pmdes: {}
         },
-        weather_data:{},
-        index:[]
+        weather_data: {},
+        index: []
       },
-      lnglat: ""
+      lnglat: "",
+      navTop: "50px",
+      navLeft: "60px",
+      bgImg: "./../../../static/img/menu.png"
     };
   },
 
@@ -199,10 +208,10 @@ export default {
       this.data.current = res.currentWeather[0];
       this.data.current.currentW = this.data.current.date.substring(14, 16);
       this.data.current.date = this.data.current.date.substring(0, 10);
-      this.data.current.pmdes=this.calcPM(this.data.current.pm25)
-      this.data.weather_data=results.weather_data
-      this.data.index=results.index;
-      console.log(this.data.current.pmdes)
+      this.data.current.pmdes = this.calcPM(this.data.current.pm25);
+      this.data.weather_data = results.weather_data;
+      this.data.index = results.index;
+      console.log(this.data.current.pmdes);
       console.log(results);
       wx.setStorage({
         key: "cityDatas",
@@ -210,21 +219,36 @@ export default {
       });
     },
     //城市查询
-    confirm(e){
+    confirm(e) {
       console.log(e.target.value);
-      
-      if(e.target.value){
-this.geocoder(e.target.value);
-      }else{
+
+      if (e.target.value) {
+        this.geocoder(e.target.value);
+      } else {
         //获取当前位置
-    wx.getLocation({
-      success: function(res) {
-        console.log(res);
-        that.init({ location: `${res.longitude},${res.latitude}` });
+        wx.getLocation({
+          success: function(res) {
+            console.log(res);
+            that.init({ location: `${res.longitude},${res.latitude}` });
+          }
+        });
       }
-    });
-      }
-    }
+    },
+    //目录栏滑动事件
+    startTouch(e){
+      console.log(e,e.pageX,e.pageY);
+    },
+    moveTouch(e){
+      //console.log(e.pageX,e.pageY);
+      this.navTop=e.clientY-20+"px";
+      this.navLeft=e.clientX-20+"px";
+      console.log(this.navTop,this.navLeft);
+    },
+    endTouch(e){
+      console.log(e)
+      //this.navTop=e.pageX+"px";
+      //this.navLeft=e.pageY+"px";
+    },
   },
 
   created() {
@@ -253,6 +277,13 @@ this.geocoder(e.target.value);
         that.init({ location: `${res.longitude},${res.latitude}` });
       }
     });
+    wx.getSystemInfo({
+      success:function(res){
+        console.log(res);
+        that.navTop=res.windowHeight-50+"px";
+        that.navLeft=res.windowWidth-50+"px";
+      }
+    })
   }
 };
 </script>
@@ -261,7 +292,8 @@ this.geocoder(e.target.value);
 .con {
   position: relative;
   z-index: 20;
-  font-family: "PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+  font-family: "PingHei", "Helvetica Neue", "Helvetica", "Arial", "Verdana",
+    "sans-serif";
 }
 .search {
   position: relative;
@@ -291,53 +323,57 @@ this.geocoder(e.target.value);
   width: 30rpx;
   height: 30rpx;
 }
-.dayPicture , .nightPicture{
+.dayPicture,
+.nightPicture {
   width: 50rpx;
   height: 50rpx;
 }
-.weather{
-  color: #fff
+.weather {
+  color: #fff;
 }
-.weather .w1{
+.weather .w1 {
   display: flex;
-  justify-content:flex-end;
+  justify-content: flex-end;
   margin-top: 20rpx;
 }
-.weather .w1 span{
+.weather .w1 span {
   margin-right: 30rpx;
 }
-.weather .w1 span:first-child{
+.weather .w1 span:first-child {
   font-size: 30rpx;
 }
-.weather .w1 span:last-child{
+.weather .w1 span:last-child {
   font-size: 20rpx;
   margin-top: 10rpx;
 }
-.weather .w2{
+.weather .w2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.weather .w2 div:first-child{
-  font:300 normal 120rpx "PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+.weather .w2 div:first-child {
+  font: 300 normal 120rpx "PingHei", "Helvetica Neue", "Helvetica", "Arial",
+    "Verdana", "sans-serif";
 }
-.weather .w2 div:nth-of-type(2){
-  font:300 normal 30rpx/50rpx "PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+.weather .w2 div:nth-of-type(2) {
+  font: 300 normal 30rpx/50rpx "PingHei", "Helvetica Neue", "Helvetica", "Arial",
+    "Verdana", "sans-serif";
 }
-.weather .w2 div:last-child{
-  font: 300 normal 25rpx/36rpx "PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+.weather .w2 div:last-child {
+  font: 300 normal 25rpx/36rpx "PingHei", "Helvetica Neue", "Helvetica", "Arial",
+    "Verdana", "sans-serif";
   display: inline-block;
   padding: 0 15rpx;
   border-radius: 18rpx;
-  background-color: rgba(255,255,255,.6);
+  background-color: rgba(255, 255, 255, 0.6);
 }
-.weather .w3{
+.weather .w3 {
   padding-top: 20rpx;
 }
 .weather .w3 ul {
-   display: flex;
-background-color: rgba(255,255,255,.1);
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .weather .w3 ul li {
   flex: 1;
@@ -345,34 +381,45 @@ background-color: rgba(255,255,255,.1);
   font-size: 25rpx;
   text-align: center;
 }
-.weather .w3 ul li p{
-margin-bottom: 10rpx;
+.weather .w3 ul li p {
+  margin-bottom: 10rpx;
 }
-.weather .w3 ul li p:nth-of-type(n+2){
+.weather .w3 ul li p:nth-of-type(n + 2) {
   line-height: 30rpx;
   height: 60rpx;
 }
-.weather .w4 ul li{
+.weather .w4 ul li {
   padding: 20rpx;
 }
-.weather .w4 ul li .img{
+.weather .w4 ul li .img {
   width: 80rpx;
   height: 80rpx;
   float: left;
   margin-top: 15rpx;
   margin-left: 10rpx;
 }
-.weather .w4 ul li h3{
+.weather .w4 ul li h3 {
   font-size: 30rpx;
 }
-.weather .w4 ul li p{
+.weather .w4 ul li p {
   padding-top: 15rpx;
   font-size: 22rpx;
   line-height: 28rpx;
   height: 56rpx;
   overflow: hidden;
 }
-.weather .w4 ul li h3,.weather .w4 ul li p{
+.weather .w4 ul li h3,
+.weather .w4 ul li p {
   margin-left: 120rpx;
+}
+.navBar {
+  position: fixed;
+  width: 60rpx;
+  height: 60rpx;
+  z-index: 10;
+}
+.coin{
+  width: 60rpx;
+  height: 60rpx;
 }
 </style>
