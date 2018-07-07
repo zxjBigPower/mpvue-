@@ -17,7 +17,7 @@
             <span>{{data.current.currentCity}}</span><span>{{data.current.date}}</span>
           </div>
           <div class="w2">
-            <div>{{data.current.currentW}}</div>
+            <div>{{data.current.currentW}}<span>℃</span></div>
             <div>{{data.current.weatherDesc}}</div>
             <div>{{data.current.pmdes.desc}} {{data.current.pmdes.val}}</div>
           </div>
@@ -49,9 +49,23 @@
           </div>
       </div>
       <!-- 导航菜单 -->
-      <div class="navBar" @touchstart="startTouch" @touchmove="moveTouch" @touchend="endTouch" :style="{top:navTop,left:navLeft}">
-
-        <img src="/static/img/menu.png" class="coin" alt="">
+      <div class="navBar" @tap="openNar" @touchstart="startTouch" @touchmove.stop="moveTouch" @touchend="endTouch" :style="{top:navTop,left:navLeft}">
+        <img src="/static/img/setting.png"
+         class="coin positionA" 
+         :class="{showIcon:showIcon}"
+         @tap='gotosetting'
+         :style="{left:0+'px',top:menuCoinTop*1.42+'px'}" alt="">
+        <img src="/static/img/more.png" 
+        class="coin positionA" 
+        :class="{showIcon:showIcon}"
+         @tap='gotoabout'
+        :style="{left:menuCoinLeft+'px',top:menuCoinTop+'px'}" alt="">
+        <img src="/static/img/info.png"
+        :class="{showIcon:showIcon}"
+         class="coin positionA" 
+         @tap='gotosystem'
+         :style="{left:menuCoinLeft*1.42+'px',top:0+'px'}" alt="">
+        <img src="/static/img/menu.png" class="coin positionR" alt="">
       </div>
     </div>
     </div>
@@ -59,7 +73,7 @@
 </template>
 
 <script>
-var app=getApp();
+var app = getApp();
 import bmap from "./../../../static/libs/bmap-wx.js";
 export default {
   data() {
@@ -80,11 +94,59 @@ export default {
       lnglat: "",
       navTop: "50px",
       navLeft: "60px",
-      bgImg: "./../../../static/img/menu.png"
+      menuCoinTop: 0,
+      menuCoinLeft: 0,
+      showIcon: false,
+      pageX: 0,
+      pageY: 0
     };
   },
-
   methods: {
+    //打开togglebar
+    openNar() {
+      this.showIcon = !this.showIcon;
+      if (this.showIcon) {
+        var gettop = this.navTop.substring(0, this.navTop.length - 2) - 0;
+        var getleft = this.navLeft.substring(0, this.navTop.length - 2) - 0;
+        //console.log(this.pageX, getleft, this.pageY, gettop, this.showIcon);
+        if (this.pageX - getleft < 100) {
+          this.menuCoinLeft = 0 - 50;
+        } else {
+          this.menuCoinLeft = 50;
+        }
+        if (getleft < 100) {
+          this.menuCoinLeft = 50;
+        }
+        if (this.pageY - gettop < 100) {
+          this.menuCoinTop = 0 - 50;
+        } else {
+          this.menuCoinTop = 50;
+        }
+        if (gettop < 100) {
+          this.menuCoinTop = 50;
+        }
+      } else {
+        this.menuCoinTop = 0;
+        this.menuCoinLeft = 0;
+      }
+      //console.log(this.menuCoinTop, this.menuCoinLeft);
+    },
+    //打开页面
+    gotosetting() {
+      wx.navigateTo({
+        url: "/pages/setting/main"
+      });
+    },
+    gotoabout() {
+      wx.navigateTo({
+        url: "/pages/setting/about"
+      });
+    },
+    gotosystem() {
+      wx.navigateTo({
+        url: "/pages/setting/system"
+      });
+    },
     //pm转换
     calcPM(value) {
       if (value > 0 && value <= 50) {
@@ -144,7 +206,6 @@ export default {
             let location = (data.result || {}).location || {};
             // location = {lng, lat}
             that.lnglat = res.data.result.location;
-
             that.init({ location: that.lnglat.lng + "," + that.lnglat.lat });
             //console.log(res.data.result.location);
           } else {
@@ -221,7 +282,6 @@ export default {
     //城市查询
     confirm(e) {
       console.log(e.target.value);
-
       if (e.target.value) {
         this.geocoder(e.target.value);
       } else {
@@ -235,22 +295,21 @@ export default {
       }
     },
     //目录栏滑动事件
-    startTouch(e){
-      console.log(e,e.pageX,e.pageY);
+    startTouch(e) {
+      //console.log(e,e.pageX,e.pageY);
     },
-    moveTouch(e){
+    moveTouch(e) {
       //console.log(e.pageX,e.pageY);
-      this.navTop=e.clientY-20+"px";
-      this.navLeft=e.clientX-20+"px";
-      console.log(this.navTop,this.navLeft);
+      this.navTop = e.clientY - 20 + "px";
+      this.navLeft = e.clientX - 20 + "px";
+      //console.log(this.navTop,this.navLeft);
     },
-    endTouch(e){
-      console.log(e)
+    endTouch(e) {
+      console.log(e);
       //this.navTop=e.pageX+"px";
       //this.navLeft=e.pageY+"px";
-    },
+    }
   },
-
   created() {
     var that = this;
     //this.geocoder("深圳");
@@ -277,13 +336,16 @@ export default {
         that.init({ location: `${res.longitude},${res.latitude}` });
       }
     });
+    //获取系统信息
     wx.getSystemInfo({
-      success:function(res){
+      success: function(res) {
         console.log(res);
-        that.navTop=res.windowHeight-50+"px";
-        that.navLeft=res.windowWidth-50+"px";
+        that.navTop = res.windowHeight - 70 + "px";
+        that.navLeft = res.windowWidth - 70 + "px";
+        that.pageX = res.windowWidth;
+        that.pageY = res.windowHeight;
       }
-    })
+    });
   }
 };
 </script>
@@ -299,7 +361,6 @@ export default {
   position: relative;
   width: 600rpx;
   margin: 0 auto;
-
   border-bottom: 1rpx solid #fff;
 }
 .search .input {
@@ -355,6 +416,9 @@ export default {
 .weather .w2 div:first-child {
   font: 300 normal 120rpx "PingHei", "Helvetica Neue", "Helvetica", "Arial",
     "Verdana", "sans-serif";
+}
+.weather .w2 div:first-child span {
+  font-size: 26rpx;
 }
 .weather .w2 div:nth-of-type(2) {
   font: 300 normal 30rpx/50rpx "PingHei", "Helvetica Neue", "Helvetica", "Arial",
@@ -414,12 +478,23 @@ export default {
 }
 .navBar {
   position: fixed;
-  width: 60rpx;
-  height: 60rpx;
-  z-index: 10;
+  width: 80rpx;
+  height: 80rpx;
+  z-index: 99999;
 }
-.coin{
-  width: 60rpx;
-  height: 60rpx;
+.coin {
+  width: 80rpx;
+  height: 80rpx;
+}
+.positionA {
+  position: absolute;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.positionR {
+  position: relative;
+}
+.showIcon {
+  opacity: 1;
 }
 </style>
