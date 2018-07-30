@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="bg"></div>
+    <div class="bg"><img :src="bgPath" alt="" class="bgImg"></div>
     <div class="con">
       <div class="header">
       <div class="search">
@@ -98,7 +98,8 @@ export default {
       menuCoinLeft: 0,
       showIcon: false,
       pageX: 0,
-      pageY: 0
+      pageY: 0,
+      bgPath:""
     };
   },
   methods: {
@@ -107,7 +108,7 @@ export default {
       this.showIcon = !this.showIcon;
       if (this.showIcon) {
         var gettop = this.navTop.substring(0, this.navTop.length - 2) - 0;
-        var getleft = this.navLeft.substring(0, this.navTop.length - 2) - 0;
+        var getleft = this.navLeft.substring(0, this.navLeft.length - 2) - 0;
         //console.log(this.pageX, getleft, this.pageY, gettop, this.showIcon);
         if (this.pageX - getleft < 100) {
           this.menuCoinLeft = 0 - 50;
@@ -299,13 +300,13 @@ export default {
       //console.log(e,e.pageX,e.pageY);
     },
     moveTouch(e) {
-      //console.log(e.pageX,e.pageY);
+      //console.log(e);
       this.navTop = e.clientY - 20 + "px";
       this.navLeft = e.clientX - 20 + "px";
       //console.log(this.navTop,this.navLeft);
     },
     endTouch(e) {
-      console.log(e);
+      //console.log(e);
       //this.navTop=e.pageX+"px";
       //this.navLeft=e.pageY+"px";
     }
@@ -346,6 +347,21 @@ export default {
         that.pageY = res.windowHeight;
       }
     });
+    
+  },
+  onShow () {
+    // `this` 指向 vm 实例
+    //console.log('a is: ' + this.a, '小程序触发的 onshow');
+    //获取保存图片列表
+    var that=this
+    wx.getSavedFileList({
+      success:(res)=>{
+        console.log(res);
+        if(res.fileList.length){
+          that.bgPath=res.fileList[res.fileList.length-1].filePath;
+        }
+      }
+    })
   }
 };
 </script>
@@ -496,5 +512,9 @@ export default {
 }
 .showIcon {
   opacity: 1;
+}
+.bgImg{
+  width: 100%;
+  height: 100%;
 }
 </style>
