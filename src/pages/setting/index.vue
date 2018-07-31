@@ -1,5 +1,6 @@
 <template>
     <div class="con">
+     
       <ul>
         <li>
           <view class="weui-cells weui-cells_after-title" @tap="customBcg">
@@ -35,6 +36,9 @@
             </view>
           </view>
         </li>
+        <li>
+          <span class="clearstroage" @tap="clearStroage">清除缓存</span>
+        </li>
       </ul>
         
         
@@ -45,20 +49,20 @@
 export default {
   data() {
     return {
-      lightVal: ""
+      lightVal: "",
     };
   },
   methods: {
     switch2Change: function(e) {
-     // console.log("switch2 发生 change 事件，携带值为", e.mp.detail.value);
-      if( e.mp.detail.value){
-         wx.setScreenBrightness({
-        value: 1
-      });
-      }else{
-         wx.setScreenBrightness({
-        value: this.lightVal/100
-      });
+      // console.log("switch2 发生 change 事件，携带值为", e.mp.detail.value);
+      if (e.mp.detail.value) {
+        wx.setScreenBrightness({
+          value: 1
+        });
+      } else {
+        wx.setScreenBrightness({
+          value: this.lightVal / 100
+        });
       }
     },
     sliderChange1(e) {
@@ -155,6 +159,27 @@ export default {
           });
         }
       });
+    },
+    //清除缓存
+    clearStroage() {
+      wx.clearStorage();
+      wx.getSavedFileList({
+        success: function(res) {
+          if (res.fileList.length > 0) {
+            wx.removeSavedFile({
+              filePath: res.fileList[0].filePath,
+              complete: function(res) {
+                console.log(res);
+              }
+            });
+          }
+        }
+      });
+      wx.showToast({
+        title: "清除缓存成功！",
+        icon: "success",
+        duration: 2000
+      });
     }
   },
 
@@ -215,5 +240,11 @@ export default {
 .section {
   padding: 20rpx 30rpx;
   border-bottom: 1px solid #eee;
+}
+.clearstroage {
+  margin: 30rpx;
+  color: #40a7e7;
+  line-height: 120rpx;
+  font-size: 36rpx;
 }
 </style>

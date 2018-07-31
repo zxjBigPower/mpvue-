@@ -140,12 +140,12 @@ export default {
     },
     gotoabout() {
       wx.navigateTo({
-        url: "/pages/setting/about"
+        url: "/pages/about/main"
       });
     },
     gotosystem() {
       wx.navigateTo({
-        url: "/pages/setting/system"
+        url: "/pages/system/main"
       });
     },
     //pm转换
@@ -319,8 +319,11 @@ export default {
       success: function(res) {
         if (res.authSetting["scope.userInfo"]) {
           wx.getUserInfo({
+            lang:"zh_CN",
+            withCredentials:true,
             success: function(res) {
-              console.log(res.userInfo);
+              //console.log(res.userInfo);
+              wx.setStorage({key:"userInfo",data:res.userInfo})
               //用户已经授权过
               console.log("用户已经授权过");
             }
@@ -340,6 +343,10 @@ export default {
     //获取系统信息
     wx.getSystemInfo({
       success: function(res) {
+        wx.setStorage({
+        key: "system",
+        data: res
+      });
         console.log(res);
         that.navTop = res.windowHeight - 70 + "px";
         that.navLeft = res.windowWidth - 70 + "px";
@@ -359,6 +366,8 @@ export default {
         console.log(res);
         if(res.fileList.length){
           that.bgPath=res.fileList[res.fileList.length-1].filePath;
+        }else{
+           that.bgPath=""
         }
       }
     })
