@@ -1,7 +1,8 @@
 <template>
-    <div class="con" @longtap="showEgg" @touchend="closeEgg">
-        <div class="bg" :class="{'open':openflag}">
-            <div class="li">HHM,请变成最好的女孩！●ω●</div>
+    <div class="con" @longpress="showEgg" @touchend="closeEgg">
+        <div class="bg " :class="{' open':openflag}">
+            <div class="li masked">{{userInfo.nickName}}, <br/> 请变成 <br/> 更好的{{userInfo.gender==1?"男孩":"女孩"}}！●ω●</div>
+            <!--  -->
         </div>
         <!-- 系统信息 -->
          <!-- <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="onGotUserInfo">获取用户信息</button>  -->
@@ -144,6 +145,23 @@ export default {
 </script>
 
 <style scoped>
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+        .masked{
+            background-image: -webkit-linear-gradient(left, #F8F8FF, #F5F5F5 25%, #DCDCDC 50%, #F5F5F5 75%,#F8F8FF);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-background-size: 200% 100%;
+            -webkit-animation: masked-animation 4s infinite linear;
+        }
+    }
+    @-webkit-keyframes masked-animation {
+        0%  { background-position: 0 0;
+           }
+        50%{
+           
+        }
+        100% { background-position: -100% 0; }
+    }
 .bg{
     width: 100%;
     height: 100%;
@@ -155,17 +173,17 @@ export default {
     color:#fefefe;
 }
 .bg.open{
-    background-color: rgba(255,255,255,.9);
+    background-color: rgba(230, 230, 230, 0.808);
     z-index: 100;
     opacity: 1;
 }
 .bg.open .li{
 display:inline-block;
-height:100rpx;
+/* height:100rpx; */
 position:absolute;
-top:10%;
+top:5%;
 margin:-50rpx 0 0;
-font-size:200rpx;
+font-size:130rpx;
 font-weight:100;
 text-align:center;
 

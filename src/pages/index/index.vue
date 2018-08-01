@@ -10,25 +10,26 @@
          placeholder-style="color:#fff"
           v-model="city" type="text" 
           placeholder="请输入要查询的城市"
+          :style="{fontSize:fsize+'rpx'}"
           @confirm="confirm($event)">
       </div>
       <div class="weather">
           <div class="w1">
-            <span>{{data.current.currentCity}}</span><span>{{data.current.date}}</span>
+            <span  :style="{fontSize:fsize+'rpx'}">{{data.current.currentCity}}</span><span :style="{fontSize:fsize-5+'rpx'}">{{data.current.date}}</span>
           </div>
           <div class="w2">
             <div>{{data.current.currentW}}<span>℃</span></div>
-            <div>{{data.current.weatherDesc}}</div>
-            <div>{{data.current.pmdes.desc}} {{data.current.pmdes.val}}</div>
+            <div :style="{fontSize:fsize+'rpx'}">{{data.current.weatherDesc}}</div>
+            <div :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+20+'rpx'}">{{data.current.pmdes.desc}} {{data.current.pmdes.val}}</div>
           </div>
           <div class="w3">
             <ul>
               <li v-for="(item,index) in data.weather_data" :key="index">
-                <p v-if="index==0">今天</p>
-                <p v-else>{{item.date}}</p>
-                <p>{{item.temperature}}</p>
-                <p>{{item.weather}}</p>
-                <p>{{item.wind}}</p>
+                <p :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+10+'rpx'}" v-if="index==0">今天</p>
+                <p :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+10+'rpx'}" v-else>{{item.date}}</p>
+                <p :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+10+'rpx'}">{{item.temperature}}</p>
+                <p :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+10+'rpx'}">{{item.weather}}</p>
+                <p :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+10+'rpx'}">{{item.wind}}</p>
                 <!--图片太丑 <img :src="item.dayPictureUrl" alt="" class="dayPicture"> -->
                 <!-- <img :src="item.nightPictureUrl" alt="" class="nightPicture"> -->
               </li>
@@ -42,31 +43,33 @@
                 <img class="img" v-if="item.title=='感冒'" src="/static/img/pill.png" alt="感冒">
                 <img class="img" v-if="item.title=='洗车'" src="/static/img/carwashing.png" alt="洗车">
                 <img class="img" v-if="item.title=='穿衣'" src="/static/img/clothing.png" alt="穿衣">
-                <h3>{{item.tipt}} {{item.zs}}</h3>
-                <p>{{item.des}}</p>
+                <h3 :style="{fontSize:fsize+'rpx'}">{{item.tipt}} {{item.zs}}</h3>
+                <p :style="{fontSize:fsize-5+'rpx',lineHeight:fsize+10+'rpx'}">{{item.des}}</p>
               </li>
             </ul>
           </div>
       </div>
       <!-- 导航菜单 -->
-      <div class="navBar" @tap="openNar" @touchstart="startTouch" @touchmove.stop="moveTouch" @touchend="endTouch" :style="{top:navTop,left:navLeft}">
-        <img src="/static/img/setting.png"
-         class="coin positionA" 
-         :class="{showIcon:showIcon}"
-         @tap='gotosetting'
-         :style="{left:0+'px',top:menuCoinTop*1.42+'px'}" alt="">
-        <img src="/static/img/more.png" 
-        class="coin positionA" 
-        :class="{showIcon:showIcon}"
-         @tap='gotoabout'
-        :style="{left:menuCoinLeft+'px',top:menuCoinTop+'px'}" alt="">
-        <img src="/static/img/info.png"
-        :class="{showIcon:showIcon}"
-         class="coin positionA" 
-         @tap='gotosystem'
-         :style="{left:menuCoinLeft*1.42+'px',top:0+'px'}" alt="">
-        <img src="/static/img/menu.png" class="coin positionR" alt="">
-      </div>
+      <button  @getuserinfo='bindgetuserinfo' open-type="getUserInfo" lang= "zh_CN">
+        <div class="navBar" @tap="openNar" @touchstart="startTouch" @touchmove.stop="moveTouch" @touchend="endTouch" :style="{top:navTop,left:navLeft}">
+          <img src="/static/img/setting.png"
+          class="coin positionA" 
+          :class="{showIcon:showIcon}"
+          @tap='gotosetting'
+          :style="{left:0+'px',top:menuCoinTop*1.42+'px'}" alt="">
+          <img src="/static/img/more.png" 
+          class="coin positionA" 
+          :class="{showIcon:showIcon}"
+          @tap='gotoabout'
+          :style="{left:menuCoinLeft+'px',top:menuCoinTop+'px'}" alt="">
+          <img src="/static/img/info.png"
+          :class="{showIcon:showIcon}"
+          class="coin positionA" 
+          @tap='gotosystem'
+          :style="{left:menuCoinLeft*1.42+'px',top:0+'px'}" alt="">
+          <img src="/static/img/menu.png" class="coin positionR" alt="">
+        </div>
+      </button>
     </div>
     </div>
   </div>
@@ -99,7 +102,8 @@ export default {
       showIcon: false,
       pageX: 0,
       pageY: 0,
-      bgPath:""
+      bgPath: "",
+      fsize:30
     };
   },
   methods: {
@@ -309,6 +313,21 @@ export default {
       //console.log(e);
       //this.navTop=e.pageX+"px";
       //this.navLeft=e.pageY+"px";
+    },
+    bindgetuserinfo: function(e) {
+      var that = this;
+      console.log(e)
+      if (e.mp.detail.userInfo) {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      console.log(e.mp.detail.userInfo);
+      wx.setStorage({ key: "userInfo", data:e.mp.detail.userInfo });
+      } else {
+        wx.showToast({
+          title: "为了您更好的体验,请先同意授权",
+          icon: "none",
+          duration: 2000
+        });
+      }
     }
   },
   created() {
@@ -318,16 +337,15 @@ export default {
     wx.getSetting({
       success: function(res) {
         if (res.authSetting["scope.userInfo"]) {
-          wx.getUserInfo({
-            lang:"zh_CN",
-            withCredentials:true,
-            success: function(res) {
-              //console.log(res.userInfo);
-              wx.setStorage({key:"userInfo",data:res.userInfo})
-              //用户已经授权过
-              console.log("用户已经授权过");
-            }
-          });
+          // wx.getUserInfo({
+          //   lang: "zh_CN",
+          //   withCredentials: true,
+          //   success: function(res) {
+          //     //console.log(res.userInfo);
+          //     wx.setStorage({ key: "userInfo", data: res.userInfo });
+          //     //用户已经授权过
+          //   }
+          // });
         } else {
           console.log("用户还未授权过");
         }
@@ -344,9 +362,9 @@ export default {
     wx.getSystemInfo({
       success: function(res) {
         wx.setStorage({
-        key: "system",
-        data: res
-      });
+          key: "system",
+          data: res
+        });
         console.log(res);
         that.navTop = res.windowHeight - 70 + "px";
         that.navLeft = res.windowWidth - 70 + "px";
@@ -354,23 +372,32 @@ export default {
         that.pageY = res.windowHeight;
       }
     });
-    
   },
-  onShow () {
+  onShow() {
     // `this` 指向 vm 实例
     //console.log('a is: ' + this.a, '小程序触发的 onshow');
     //获取保存图片列表
-    var that=this
+    var that = this;
     wx.getSavedFileList({
-      success:(res)=>{
+      success: res => {
         console.log(res);
-        if(res.fileList.length){
-          that.bgPath=res.fileList[res.fileList.length-1].filePath;
-        }else{
-           that.bgPath=""
+        if (res.fileList.length) {
+          that.bgPath = res.fileList[res.fileList.length - 1].filePath;
+        } else {
+          that.bgPath = "";
         }
       }
-    })
+    });
+    wx.getStorage({
+      key: "fontSize",
+      success: function(res) {
+        console.log(res);
+        if(res.data){
+          that.fsize = res.data;
+        }
+        
+      }
+    });
   }
 };
 </script>
@@ -385,7 +412,7 @@ export default {
 .search {
   position: relative;
   width: 600rpx;
-  margin: 0 auto;
+  margin: 30rpx auto 0;
   border-bottom: 1rpx solid #fff;
 }
 .search .input {
@@ -454,6 +481,7 @@ export default {
     "Verdana", "sans-serif";
   display: inline-block;
   padding: 0 15rpx;
+  margin-top: 5rpx;
   border-radius: 18rpx;
   background-color: rgba(255, 255, 255, 0.6);
 }
@@ -475,7 +503,7 @@ export default {
 }
 .weather .w3 ul li p:nth-of-type(n + 2) {
   line-height: 30rpx;
-  height: 60rpx;
+  /* height: 60rpx; */
 }
 .weather .w4 ul li {
   padding: 20rpx;
@@ -494,7 +522,7 @@ export default {
   padding-top: 15rpx;
   font-size: 22rpx;
   line-height: 28rpx;
-  height: 56rpx;
+  /* height: 56rpx; */
   overflow: hidden;
 }
 .weather .w4 ul li h3,
@@ -522,7 +550,7 @@ export default {
 .showIcon {
   opacity: 1;
 }
-.bgImg{
+.bgImg {
   width: 100%;
   height: 100%;
 }

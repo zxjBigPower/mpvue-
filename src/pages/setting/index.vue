@@ -36,6 +36,13 @@
             </view>
           </view>
         </li>
+          <view class="section section_gap">
+            <text class="section__title">设置字体大小</text>
+            <view class="body-view">
+                <slider @changing="sliderChange2" :value="fontSize" min="20" max="50" show-value/>
+            </view>
+            <p :style="{fontSize:fontSize+'rpx'}">字体大小</p>
+          </view>
         <li>
           <span class="clearstroage" @tap="clearStroage">清除缓存</span>
         </li>
@@ -50,6 +57,7 @@ export default {
   data() {
     return {
       lightVal: "",
+      fontSize:"30"
     };
   },
   methods: {
@@ -71,6 +79,15 @@ export default {
         value: e.mp.detail.value / 100
       });
     },
+    //字体设置
+    sliderChange2(e){
+      wx.setStorage({
+        key:"fontSize",
+        data:e.mp.detail.value
+      })
+      this.fontSize=e.mp.detail.value+""
+      //console.log(this.fontSize);
+    },
     //检查是否支持NFC
     setPlain() {
       wx.showLoading({
@@ -91,7 +108,7 @@ export default {
             if (flag) {
               wx.showToast({
                 title: "恭喜您，您的机型支持NFC功能！",
-                icon: "success",
+                icon: "none",
                 duration: 2000
               });
             } else {
