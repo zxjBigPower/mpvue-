@@ -1,0 +1,101 @@
+<template name="index$3a4f031c">
+  <view class="_div data-v-cfa9d91e con" bindlongpress="handleProxy" bindtouchend="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-cfa9d91e bg  {{[openflag ? ' open' : '']}}">
+      <view class="_div data-v-cfa9d91e li masked">{{userInfo.nickName}},
+        <view class="_br data-v-cfa9d91e"></view> 请变成
+        <view class="_br data-v-cfa9d91e"></view> 更好的{{userInfo.gender==1?"男孩":"女孩"}}！●ω●</view>
+    </view>
+    <view class="_ul data-v-cfa9d91e">
+      <view class="_li data-v-cfa9d91e center">
+        <image class="_img data-v-cfa9d91e userPhoto" src="{{userInfo.avatarUrl}}" alt></image>
+      </view>
+      <view class="_li data-v-cfa9d91e center username">用户名：{{userInfo.nickName}}</view>
+      <view class="_li data-v-cfa9d91e center where">地区：{{userInfo.country}}-{{userInfo.province}}-{{userInfo.city}}</view>
+      <view class="_li data-v-cfa9d91e center gender">性别：{{userInfo.gender==1?"男":"女"}}</view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">手机品牌</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.brand}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">手机型号</view>
+          <label class="_span data-v-cfa9d91e"> {{systemInfo.model}} </label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">设备像素比</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.pixelRatio}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">屏幕宽度</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.screenWidth}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">屏幕高度</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.screenHeight}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">可使用窗口宽度</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.windowWidth}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">可使用窗口高度</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.windowHeight}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">状态栏高度</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.statusBarHeight}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">微信设置语言</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.language}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">操作系统版本</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.system}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">客户端平台</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.platform}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">微信版本号</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.version}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">用户字体大小设置(px)</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.fontSizeSetting}}</label>
+        </view>
+      </view>
+      <view class="_li data-v-cfa9d91e system">
+        <view class="_div data-v-cfa9d91e">
+          <view class="_p data-v-cfa9d91e">客户端基础库版本</view>
+          <label class="_span data-v-cfa9d91e">{{systemInfo.SDKVersion}}</label>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

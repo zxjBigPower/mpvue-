@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/about/main",
+    "pages/counter/main",
+    "pages/logs/main",
+    "pages/setting/main",
+    "pages/system/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#40a7e7",
+    "navigationBarTitleText": "天气预报",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  }
+}

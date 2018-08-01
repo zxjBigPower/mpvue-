@@ -1,0 +1,50 @@
+<template name="index$6acd1dee">
+  <view class="_div data-v-0a37f538 con">
+    <view class="_ul data-v-0a37f538">
+      <view class="_li data-v-0a37f538">
+        <view class="_view data-v-0a37f538 weui-cells weui-cells_after-title" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+          <view class="_view data-v-0a37f538 weui-cell">
+            <view class="_view data-v-0a37f538 weui-cell__bd">修改背景</view>
+            <view class="_view data-v-0a37f538 weui-cell__ft"></view>
+          </view>
+        </view>
+      </view>
+      <view class="_li data-v-0a37f538">
+        <view class="_view data-v-0a37f538 weui-cells weui-cells_after-title" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+          <view class="_view data-v-0a37f538 weui-cell">
+            <view class="_view data-v-0a37f538 weui-cell__bd">检查本机是否支持NFC</view>
+            <view class="_view data-v-0a37f538 weui-cell__ft"></view>
+          </view>
+        </view>
+      </view>
+      <view class="_view data-v-0a37f538 section section_gap">
+        <text class="_text data-v-0a37f538 section__title">设置屏幕亮度</text>
+        <view class="_view data-v-0a37f538 body-view">
+          <slider bindchanging="handleProxy" value="{{lightVal}}" show-value data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_slider data-v-0a37f538" />
+        </view>
+      </view>
+      <view class="_li data-v-0a37f538">
+        <view class="_view data-v-0a37f538 weui-cells weui-cells_after-title">
+          <view class="_view data-v-0a37f538 weui-cell">
+            <view class="_view data-v-0a37f538 weui-cell__bd">保持高亮</view>
+            <view class="_view data-v-0a37f538 weui-cell__f">
+              <view class="_view data-v-0a37f538 body-view">
+                <switch bindchange="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_switch data-v-0a37f538" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="_view data-v-0a37f538 section section_gap">
+        <text class="_text data-v-0a37f538 section__title">设置字体大小</text>
+        <view class="_view data-v-0a37f538 body-view">
+          <slider bindchanging="handleProxy" value="{{fontSize}}" min="20" max="50" show-value data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_slider data-v-0a37f538" />
+        </view>
+        <view class="_p data-v-0a37f538" style=" {{('font-size:' + (fontSize + 'rpx') + ';')}}">字体大小</view>
+      </view>
+      <view class="_li data-v-0a37f538">
+        <label class="_span data-v-0a37f538 clearstroage" bindtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}">清除缓存</label>
+      </view>
+    </view>
+  </view>
+</template>

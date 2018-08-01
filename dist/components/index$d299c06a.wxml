@@ -1,0 +1,61 @@
+<template name="index$d299c06a">
+  <view class="_div data-v-992de0b4 container">
+    <view class="_div data-v-992de0b4 bg">
+      <image src="{{bgPath}}" alt class="_img data-v-992de0b4 bgImg"></image>
+    </view>
+    <view class="_div data-v-992de0b4 con">
+      <view class="_div data-v-992de0b4 header">
+        <view class="_div data-v-992de0b4 search">
+          <image src="/static/img/search.png" alt class="_image data-v-992de0b4 image"></image>
+          <input class="_input data-v-992de0b4 input" confirm-type="search" placeholder-style="color:#fff" value="{{city}}" bindinput="handleProxy" type="text" placeholder="请输入要查询的城市" bindconfirm="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}"
+            style=" {{('font-size:' + (fsize + 'rpx') + ';')}}" />
+        </view>
+        <view class="_div data-v-992de0b4 weather">
+          <view class="_div data-v-992de0b4 w1">
+            <label class="_span data-v-992de0b4" style=" {{('font-size:' + (fsize + 'rpx') + ';')}}">{{data.current.currentCity}}</label>
+            <label class="_span data-v-992de0b4" style=" {{('font-size:' + (fsize - 5 + 'rpx') + ';')}}">{{data.current.date}}</label>
+          </view>
+          <view class="_div data-v-992de0b4 w2">
+            <view class="_div data-v-992de0b4">{{data.current.currentW}}
+              <label class="_span data-v-992de0b4">℃</label>
+            </view>
+            <view class="_div data-v-992de0b4" style=" {{('font-size:' + (fsize + 'rpx') + ';')}}">{{data.current.weatherDesc}}</view>
+            <view class="_div data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 20 + 'rpx') +  ';')}}">{{data.current.pmdes.desc}} {{data.current.pmdes.val}}</view>
+          </view>
+          <view class="_div data-v-992de0b4 w3">
+            <view class="_ul data-v-992de0b4">
+              <view wx:key="index" key="{{index}}" wx:for="{{data.weather_data}}" wx:for-index="index" wx:for-item="item" class="_li data-v-992de0b4">
+                <view wx:if="{{index==0}}" class="_p data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 10 + 'rpx') +  ';')}}">今天</view>
+                <view wx:else class="_p data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 10 + 'rpx') +  ';')}}">{{item.date}}</view>
+                <view class="_p data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 10 + 'rpx') +  ';')}}">{{item.temperature}}</view>
+                <view class="_p data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 10 + 'rpx') +  ';')}}">{{item.weather}}</view>
+                <view class="_p data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 10 + 'rpx') +  ';')}}">{{item.wind}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="_div data-v-992de0b4 w4">
+            <view class="_ul data-v-992de0b4">
+              <view wx:key="index" key="{{index}}" wx:for="{{data.index}}" wx:for-index="index" wx:for-item="item" class="_li data-v-992de0b4">
+                <image class="_img data-v-992de0b4 img" wx:if="{{item.title=='紫外线强度'}}" src="/static/img/sun.png" alt="紫外线"></image>
+                <image class="_img data-v-992de0b4 img" wx:if="{{item.title=='运动'}}" src="/static/img/running.png" alt="运动"></image>
+                <image class="_img data-v-992de0b4 img" wx:if="{{item.title=='感冒'}}" src="/static/img/pill.png" alt="感冒"></image>
+                <image class="_img data-v-992de0b4 img" wx:if="{{item.title=='洗车'}}" src="/static/img/carwashing.png" alt="洗车"></image>
+                <image class="_img data-v-992de0b4 img" wx:if="{{item.title=='穿衣'}}" src="/static/img/clothing.png" alt="穿衣"></image>
+                <view class="_h3 data-v-992de0b4" style=" {{('font-size:' + (fsize + 'rpx') + ';')}}">{{item.tipt}} {{item.zs}}</view>
+                <view class="_p data-v-992de0b4" style=" {{(  'font-size:' +  (fsize - 5 + 'rpx') +  ';' +  'line-height:' +  (fsize + 10 + 'rpx') +  ';')}}">{{item.des}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <button bindgetuserinfo="handleProxy" open-type="getUserInfo" lang="zh_CN" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_button data-v-992de0b4">
+          <view class="_div data-v-992de0b4 navBar" bindtap="handleProxy" bindtouchstart="handleProxy" catchtouchmove="handleProxy" bindtouchend="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" style=" {{('top:' + navTop + ';' + 'left:' + navLeft + ';')}}">
+            <image src="/static/img/setting.png" class="_img data-v-992de0b4 coin positionA {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'1'}}" data-comkey="{{$k}}" style=" {{('left:' + (0 + 'px') + ';' + 'top:' + (menuCoinTop * 1.42 + 'px') + ';')}}"></image>
+            <image src="/static/img/more.png" class="_img data-v-992de0b4 coin positionA {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'2'}}" data-comkey="{{$k}}" style=" {{('left:' + (menuCoinLeft + 'px') + ';' + 'top:' + (menuCoinTop + 'px') + ';')}}"></image>
+            <image src="/static/img/info.png" class="_img data-v-992de0b4 coin positionA {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'3'}}" data-comkey="{{$k}}" style=" {{('left:' + (menuCoinLeft * 1.42 + 'px') + ';' + 'top:' + (0 + 'px') + ';')}}"></image>
+            <image src="/static/img/menu.png" class="_img data-v-992de0b4 coin positionR" alt></image>
+          </view>
+        </button>
+      </view>
+    </view>
+  </view>
+</template>
