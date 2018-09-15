@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="bg"><img :src="bgPath" alt="" class="bgImg"></div>
+    <div class="bg"><img :src="bgPath" mode='widthFix' alt="" class="bgImg"></div>
     <div class="con">
       <div class="header">
       <div class="search">
@@ -48,23 +48,28 @@
               </li>
             </ul>
           </div>
+          <view class='carDesc carDesc1'>
+            <button class='share' id="shareBtn" :style="{fontSize:fsize+'rpx'}" open-type="share" hover-class="other-button-hover">
+              分享给好友
+            </button>
+          </view>
       </div>
       <!-- 导航菜单 -->
       <button  @getuserinfo='bindgetuserinfo' open-type="getUserInfo" lang= "zh_CN">
         <div class="navBar" @tap="openNar" @touchstart="startTouch" @touchmove.stop="moveTouch" @touchend="endTouch" :style="{top:navTop,left:navLeft}">
           <img src="/static/img/setting.png"
-          class="coin positionA" 
+          class="coin positionA transition1" 
           :class="{showIcon:showIcon}"
           @tap='gotosetting'
           :style="{left:0+'px',top:menuCoinTop*1.42+'px'}" alt="">
           <img src="/static/img/more.png" 
-          class="coin positionA" 
+          class="coin positionA transition2" 
           :class="{showIcon:showIcon}"
           @tap='gotoabout'
           :style="{left:menuCoinLeft+'px',top:menuCoinTop+'px'}" alt="">
           <img src="/static/img/info.png"
           :class="{showIcon:showIcon}"
-          class="coin positionA" 
+          class="coin positionA transition3" 
           @tap='gotosystem'
           :style="{left:menuCoinLeft*1.42+'px',top:0+'px'}" alt="">
           <img src="/static/img/menu.png" class="coin positionR" alt="">
@@ -103,7 +108,7 @@ export default {
       pageX: 0,
       pageY: 0,
       bgPath: "",
-      fsize:30
+      fsize: 30
     };
   },
   methods: {
@@ -247,6 +252,8 @@ export default {
       let errMsg = res.errMsg || "";
       // 拒绝授权地理位置权限
       if (errMsg.indexOf("deny") !== -1 || errMsg.indexOf("denied") !== -1) {
+        wx.hideNavigationBarLoading(); //完成停止加载
+        wx.stopPullDownRefresh(); //停止下拉刷新
         wx.showToast({
           title: "需要开启地理位置权限",
           icon: "none",
@@ -279,6 +286,8 @@ export default {
       this.data.index = results.index;
       console.log(this.data.current.pmdes);
       console.log(results);
+      wx.hideNavigationBarLoading(); //完成停止加载
+      wx.stopPullDownRefresh(); //停止下拉刷新
       wx.setStorage({
         key: "cityDatas",
         data: res
@@ -316,11 +325,11 @@ export default {
     },
     bindgetuserinfo: function(e) {
       var that = this;
-      console.log(e)
+      console.log(e);
       if (e.mp.detail.userInfo) {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      console.log(e.mp.detail.userInfo);
-      wx.setStorage({ key: "userInfo", data:e.mp.detail.userInfo });
+        console.log(e.mp.detail.userInfo);
+        wx.setStorage({ key: "userInfo", data: e.mp.detail.userInfo });
       } else {
         wx.showToast({
           title: "为了您更好的体验,请先同意授权",
@@ -330,6 +339,27 @@ export default {
       }
     }
   },
+  //分享功能
+  onShareAppMessage: function(ops) {
+    if (ops.from === "button") {
+      // 来自页面内转发按钮
+      console.log(ops);
+      //console.log(ops.target);
+    }
+    return {
+      title: "还没起名字的一款天气预报",
+      path: "pages/index/main",
+      success: function(res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
+        //console.log("pages/index/main")
+      },
+      fail: function(res) {
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
+      }
+    };
+  },
   created() {
     var that = this;
     //this.geocoder("深圳");
@@ -337,15 +367,6 @@ export default {
     wx.getSetting({
       success: function(res) {
         if (res.authSetting["scope.userInfo"]) {
-          // wx.getUserInfo({
-          //   lang: "zh_CN",
-          //   withCredentials: true,
-          //   success: function(res) {
-          //     //console.log(res.userInfo);
-          //     wx.setStorage({ key: "userInfo", data: res.userInfo });
-          //     //用户已经授权过
-          //   }
-          // });
         } else {
           console.log("用户还未授权过");
         }
@@ -392,12 +413,27 @@ export default {
       key: "fontSize",
       success: function(res) {
         console.log(res);
-        if(res.data){
+        if (res.data) {
           that.fsize = res.data;
         }
-        
       }
     });
+  },
+  onPullDownRefresh: function() {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    var that = this;
+    wx.getLocation({
+      success: function(res) {
+        console.log(res);
+        that.init({ location: `${res.longitude},${res.latitude}` });
+      }
+    });
+    //模拟加载
+    // setTimeout(function() {
+    //   // complete
+    //   wx.hideNavigationBarLoading(); //完成停止加载
+    //   wx.stopPullDownRefresh(); //停止下拉刷新
+    // }, 500);
   }
 };
 </script>
@@ -542,7 +578,16 @@ export default {
 .positionA {
   position: absolute;
   opacity: 0;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.transition1 {
+  transition: all 0.25s ease-in-out;
+}
+.transition2 {
+  transition: all 0.25s 0.1s ease-in-out;
+}
+.transition3 {
+  transition: all 0.25s 0.2s ease-in-out;
 }
 .positionR {
   position: relative;
@@ -552,6 +597,30 @@ export default {
 }
 .bgImg {
   width: 100%;
-  height: 100%;
+}
+.share {
+  background: transparent;
+  position: static;
+  animation: changes 3s ease-in-out infinite;
+  margin-top: -2rpx;
+  height: 80rpx;
+}
+.carDesc {
+  height: 78rpx;
+  overflow: hidden;
+}
+@keyframes changes {
+  0% {
+    color: yellow;
+    transform: scale(1, 1);
+  }
+  50% {
+    color: yellowgreen;
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    color: yellow;
+    transform: scale(1, 1);
+  }
 }
 </style>

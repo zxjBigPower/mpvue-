@@ -17,41 +17,48 @@
     <block v-for="(item,index) in bannerImgList" :key="index">
       <swiper-item>
         <view class='info' :data-index='index' @tap='previewImages'>
-          <img :src='item'/>
-          <view class='name'>还没起名字的一款天气预报</view>
+          <img :src='item' mode='widthFix'/>
         </view>
       </swiper-item>
     </block>
   </swiper>
+  <view style="text-align:center" class='name'>巴啦啦小魔仙</view>
   <view class='feedback item'>
     <view class='title'>建议 & 意见反馈</view>
     <view class='i' catchtap='copy' data-title='GitHub' :data-content='github'>
         对不起，您的意见我一定会听，但肯定不会改，哈哈哈~~~
     </view>
+    <!-- <view class='title'>可爱的小仙女</view>
+    <view class='i' catchtap='copy' style="text-indent:2em" >
+        从初识的时间到未来的日子，不管我们隔着多远的距离，我希望有这样一个小程序陪在你身边，提醒你明天或晴或雨。
+如果可以，我希望在晴空万里的时候化作你头顶白云遮住太阳，如果可以，我希望在雨天的时候变成你头上的车顶，与你同行。
+时间的齿轮转不停，我很害怕，因为不知道我们之间是在相互靠近，还是远离。
+有一点，我可以确定，我不会忘记你的酒窝和自带阳光的笑，让我从尘埃里生长出对未来的憧憬。
+    </view> -->
     <view class='i'>
       <img src='/static/img/wechat.png'/>
-      <view class='text'>微信快速联系</view>
+      <view class='text'>微信快速联系（欢迎吐槽）</view>
       <button open-type="contact" class='btn'>联系我们</button>
     </view>
   </view>
   <view class='thanks item'>
     <view class='title'>鸣谢</view>
     <view class='i'>
-      <!-- <image src='/static/img/location_grey.png'></image> -->
+      <img src='/static/img/location_grey.png'/>
       <view class='text'>地理编码：百度地图开放平台</view>
     </view>
     <view class='i'>
-      <!-- <image src='/static/img/weather.png'></image> -->
+      <img src='/static/img/weather.png'/>
       <view class='text'>天气数据来源：百度地图开放平台</view>
     </view>
   </view>
   <view class='attention item'>
     <view class='title'>注意事项</view>
-    <view class='i'>
-      <!-- <image src='/img/location_grey.png'></image> -->
-      <view class='text'>还没起名字的一款天气预报小程序（复刻版）的数据均存储在本地，没有账号体系，没有数据同步功能，若清空微信相关数据可能会造成数据（首页缓存数据、首页悬浮球位置信息、设置）丢失（看个天气而已，何必纠结）。</view>
+    <view class='i'> 
+      <image src='/img/location_grey.png'></image>
+      <view class='text'>还没起名字的一款天气预报小程序（没朋友复刻版）的数据均存储在本地，没有账号体系，没有数据同步功能，若清空微信相关数据可能会造成数据（首页缓存数据、首页悬浮球位置信息、设置）丢失（看个天气而已，何必纠结）。</view>
     </view>
-  </view>
+  </view> 
   <view class='attention item'>
     <view class='title'>author</view>
     <view class='i'>
@@ -70,21 +77,21 @@ var allSpaceTime = 50; //线程执行间隔时间
 var animateinterval = "";
 var rangArr = [
   {
-    endText: "HHM",
+    endText: "girl",
     texts: topText,
     beginTime: 500,
     spacetime: 10,
     stime: 500
   },
   {
-    endText: "清爽干练",
+    endText: "小仙女",
     texts: topText,
     beginTime: 1000,
     spacetime: 10,
     stime: 1000
   },
   {
-    endText: "简约利落",
+    endText: "小可爱",
     texts: topText,
     beginTime: 1200,
     spacetime: 10,
@@ -105,21 +112,21 @@ var rangArr = [
     stime: 1000
   },
   {
-    endText: "中性风",
+    endText: "天仙",
     texts: topText,
     beginTime: 2000,
     spacetime: 10,
     stime: 1000
   },
   {
-    endText: "时尚先生",
+    endText: "秀色可餐",
     texts: topText,
     beginTime: 2200,
     spacetime: 10,
     stime: 1000
   },
   {
-    endText: "简约利落",
+    endText: "元气少女",
     texts: topText,
     beginTime: 2400,
     spacetime: 10,
@@ -135,7 +142,8 @@ export default {
       swiperHeight: "auto",
       bannerImgList: [
         "http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg",
-        "http://bpic.588ku.com/element_origin_min_pic/18/06/10/19b540199a4fee3721dc863cb6564705.jpg"
+        "http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg",
+        "http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg"
       ],
       openflag: false,
       text1: "",
@@ -175,9 +183,11 @@ export default {
       }
     },
     setSwiperHeight(res) {
-      this.swiperHeight = `${(res.windowWidth || res.screenWidth) /
-        375 *
-        200}px`;
+      console.log(res);
+      // this.swiperHeight = `${(res.windowWidth || res.screenWidth) /
+      //   375 *
+      //   200}px`;
+      this.swiperHeight = "678rpx";
     },
     copy(e) {
       let dataset = (e.target || {}).dataset || {};
@@ -200,6 +210,14 @@ export default {
     },
     closeEgg() {
       this.openflag = false;
+      this.text1 = "";
+      this.text2 = "";
+      this.text3 = "";
+      this.text4 = "";
+      this.text5 = "";
+      this.text6 = "";
+      this.text7 = "";
+      this.text8 = "";
     },
     randDomText: function() {
       //endText最终显示文字，texts闪烁文字，time延迟时间,spacetime闪烁频率,stime闪烁周期
@@ -258,7 +276,7 @@ export default {
           //console.log(showData)
           for (var k in showData) {
             that[k] = showData[k];
-            console.log(that.k);
+            //console.log(that.k);
           }
 
           //that.setData(showData);
@@ -318,9 +336,7 @@ export default {
   padding: 60rpx 40rpx;
 }
 .info image {
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 50%;
+  width: 100%;
   margin-bottom: 30rpx;
 }
 .item {
@@ -382,7 +398,7 @@ page {
 .detailTopText2 {
   margin-left: 217rpx;
   font-size: 40rpx;
-  color: palegreen
+  color: palegreen;
 }
 .detailTopText3 {
   margin-left: 91rpx;
@@ -394,7 +410,7 @@ page {
   margin-left: 432rpx;
   margin-top: 16rpx;
   font-size: 57rpx;
-  color: mediumturquoise
+  color: mediumturquoise;
 }
 .detailTopText5 {
   margin-left: 126rpx;
@@ -406,7 +422,7 @@ page {
   margin-left: 530rpx;
   margin-top: 95rpx;
   font-size: 47rpx;
-  color: lightslategray
+  color: lightslategray;
 }
 .detailTopText7 {
   margin-left: 82rpx;

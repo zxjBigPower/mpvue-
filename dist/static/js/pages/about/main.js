@@ -1,13 +1,13 @@
 global.webpackJsonp([4],{
 
-/***/ 75:
+/***/ 77:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(78);
 
 
 
@@ -21,16 +21,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 76:
+/***/ 78:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_template_compiler_index_id_data_v_955dc6be_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_template_compiler_index_id_data_v_955dc6be_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(83);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(77)
+  __webpack_require__(79)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -75,22 +75,29 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 77:
+/***/ 79:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 78:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_libs_untils_js__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_libs_untils_js__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_libs_untils_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_libs_untils_js__);
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -162,19 +169,19 @@ var topText = ["活泼", "时尚", "典雅", "甜美", "自然", "浪漫", "文�
 var allSpaceTime = 50; //线程执行间隔时间
 var animateinterval = "";
 var rangArr = [{
-  endText: "HHM",
+  endText: "girl",
   texts: topText,
   beginTime: 500,
   spacetime: 10,
   stime: 500
 }, {
-  endText: "清爽干练",
+  endText: "小仙女",
   texts: topText,
   beginTime: 1000,
   spacetime: 10,
   stime: 1000
 }, {
-  endText: "简约利落",
+  endText: "小可爱",
   texts: topText,
   beginTime: 1200,
   spacetime: 10,
@@ -192,19 +199,19 @@ var rangArr = [{
   spacetime: 10,
   stime: 1000
 }, {
-  endText: "中性风",
+  endText: "天仙",
   texts: topText,
   beginTime: 2000,
   spacetime: 10,
   stime: 1000
 }, {
-  endText: "时尚先生",
+  endText: "秀色可餐",
   texts: topText,
   beginTime: 2200,
   spacetime: 10,
   stime: 1000
 }, {
-  endText: "简约利落",
+  endText: "元气少女",
   texts: topText,
   beginTime: 2400,
   spacetime: 10,
@@ -217,7 +224,7 @@ var rangArr = [{
       email: "851399101@qq.com",
       qq: "851399101",
       swiperHeight: "auto",
-      bannerImgList: ["http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg", "http://bpic.588ku.com/element_origin_min_pic/18/06/10/19b540199a4fee3721dc863cb6564705.jpg"],
+      bannerImgList: ["http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg", "http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg", "http://bpic.588ku.com/element_origin_min_pic/18/06/10/bfe427583d63bd521becf65d43bac6f4.jpg"],
       openflag: false,
       text1: "",
       text2: "",
@@ -257,7 +264,11 @@ var rangArr = [{
       }
     },
     setSwiperHeight: function setSwiperHeight(res) {
-      this.swiperHeight = (res.windowWidth || res.screenWidth) / 375 * 200 + "px";
+      console.log(res);
+      // this.swiperHeight = `${(res.windowWidth || res.screenWidth) /
+      //   375 *
+      //   200}px`;
+      this.swiperHeight = "678rpx";
     },
     copy: function copy(e) {
       var dataset = (e.target || {}).dataset || {};
@@ -280,6 +291,14 @@ var rangArr = [{
     },
     closeEgg: function closeEgg() {
       this.openflag = false;
+      this.text1 = "";
+      this.text2 = "";
+      this.text3 = "";
+      this.text4 = "";
+      this.text5 = "";
+      this.text6 = "";
+      this.text7 = "";
+      this.text8 = "";
     },
 
     randDomText: function randDomText() {
@@ -333,7 +352,7 @@ var rangArr = [{
           //console.log(showData)
           for (var k in showData) {
             that[k] = showData[k];
-            console.log(that.k);
+            //console.log(that.k);
           }
 
           //that.setData(showData);
@@ -351,7 +370,7 @@ var rangArr = [{
 
 /***/ }),
 
-/***/ 79:
+/***/ 82:
 /***/ (function(module, exports) {
 
 let formatDate = (nDate, date) => {
@@ -431,7 +450,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 80:
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -503,12 +522,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }, [_c('img', {
       attrs: {
-        "src": item
+        "src": item,
+        "mode": "widthFix"
       }
-    }), _vm._v(" "), _c('view', {
-      staticClass: "name"
-    }, [_vm._v("还没起名字的一款天气预报")])])])], 1)
+    })])])], 1)
   })), _vm._v(" "), _c('view', {
+    staticClass: "name",
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._v("巴啦啦小魔仙")]), _vm._v(" "), _c('view', {
     staticClass: "feedback item"
   }, [_c('view', {
     staticClass: "title"
@@ -527,7 +550,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('view', {
     staticClass: "text"
-  }, [_vm._v("微信快速联系")]), _vm._v(" "), _c('button', {
+  }, [_vm._v("微信快速联系（欢迎吐槽）")]), _vm._v(" "), _c('button', {
     staticClass: "btn",
     attrs: {
       "open-type": "contact"
@@ -541,11 +564,19 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "title"
   }, [_vm._v("鸣谢")]), _vm._v(" "), _c('view', {
     staticClass: "i"
-  }, [_c('view', {
+  }, [_c('img', {
+    attrs: {
+      "src": "/static/img/location_grey.png"
+    }
+  }), _vm._v(" "), _c('view', {
     staticClass: "text"
   }, [_vm._v("地理编码：百度地图开放平台")])]), _vm._v(" "), _c('view', {
     staticClass: "i"
-  }, [_c('view', {
+  }, [_c('img', {
+    attrs: {
+      "src": "/static/img/weather.png"
+    }
+  }), _vm._v(" "), _c('view', {
     staticClass: "text"
   }, [_vm._v("天气数据来源：百度地图开放平台")])])])
 },function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -555,9 +586,13 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "title"
   }, [_vm._v("注意事项")]), _vm._v(" "), _c('view', {
     staticClass: "i"
-  }, [_c('view', {
+  }, [_c('image', {
+    attrs: {
+      "src": "/img/location_grey.png"
+    }
+  }), _vm._v(" "), _c('view', {
     staticClass: "text"
-  }, [_vm._v("还没起名字的一款天气预报小程序（复刻版）的数据均存储在本地，没有账号体系，没有数据同步功能，若清空微信相关数据可能会造成数据（首页缓存数据、首页悬浮球位置信息、设置）丢失（看个天气而已，何必纠结）。")])])])
+  }, [_vm._v("还没起名字的一款天气预报小程序（没朋友复刻版）的数据均存储在本地，没有账号体系，没有数据同步功能，若清空微信相关数据可能会造成数据（首页缓存数据、首页悬浮球位置信息、设置）丢失（看个天气而已，何必纠结）。")])])])
 },function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('view', {
     staticClass: "attention item"
@@ -581,5 +616,5 @@ if (false) {
 
 /***/ })
 
-},[75]);
+},[77]);
 //# sourceMappingURL=main.js.map

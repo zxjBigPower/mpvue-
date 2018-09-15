@@ -40,9 +40,7 @@
   padding: 60rpx 40rpx;
 }
 .info image.data-v-955dc6be {
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 50%;
+  width: 100%;
   margin-bottom: 30rpx;
 }
 .item.data-v-955dc6be {

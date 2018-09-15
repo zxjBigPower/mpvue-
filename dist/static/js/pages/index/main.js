@@ -1,31 +1,36 @@
 global.webpackJsonp([2],{
 
-/***/ 88:
+/***/ 91:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(92);
 
 
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__index__["a" /* default */]);
 app.$mount();
+/* harmony default export */ __webpack_exports__["default"] = ({
+    config: {
+        "enablePullDownRefresh": true
+    }
+});
 
 /***/ }),
 
-/***/ 89:
+/***/ 92:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_template_compiler_index_id_data_v_992de0b4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_template_compiler_index_id_data_v_992de0b4_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_1_0_15_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(96);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(90)
+  __webpack_require__(93)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -70,19 +75,27 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 90:
+/***/ 93:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 91:
+/***/ 94:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__static_libs_bmap_wx_js__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__static_libs_bmap_wx_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__static_libs_bmap_wx_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_libs_bmap_wx_js__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_libs_bmap_wx_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_libs_bmap_wx_js__);
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -320,7 +333,7 @@ var app = getApp();
     init: function init(params) {
       console.log(params.location);
       var that = this;
-      var BMap = new __WEBPACK_IMPORTED_MODULE_0__static_libs_bmap_wx_js___default.a.BMapWX({
+      var BMap = new __WEBPACK_IMPORTED_MODULE_1__static_libs_bmap_wx_js___default.a.BMapWX({
         ak: this.globalData.ak
       });
       BMap.weather({
@@ -336,6 +349,8 @@ var app = getApp();
       var errMsg = res.errMsg || "";
       // 拒绝授权地理位置权限
       if (errMsg.indexOf("deny") !== -1 || errMsg.indexOf("denied") !== -1) {
+        wx.hideNavigationBarLoading(); //完成停止加载
+        wx.stopPullDownRefresh(); //停止下拉刷新
         wx.showToast({
           title: "需要开启地理位置权限",
           icon: "none",
@@ -368,6 +383,8 @@ var app = getApp();
       this.data.index = results.index;
       console.log(this.data.current.pmdes);
       console.log(results);
+      wx.hideNavigationBarLoading(); //完成停止加载
+      wx.stopPullDownRefresh(); //停止下拉刷新
       wx.setStorage({
         key: "cityDatas",
         data: res
@@ -422,23 +439,34 @@ var app = getApp();
       }
     }
   },
+  //分享功能
+  onShareAppMessage: function onShareAppMessage(ops) {
+    if (ops.from === "button") {
+      // 来自页面内转发按钮
+      console.log(ops);
+      //console.log(ops.target);
+    }
+    return {
+      title: "还没起名字的一款天气预报",
+      path: "pages/index/main",
+      success: function success(res) {
+        // 转发成功
+        console.log("转发成功:" + __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(res));
+        //console.log("pages/index/main")
+      },
+      fail: function fail(res) {
+        // 转发失败
+        console.log("转发失败:" + __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(res));
+      }
+    };
+  },
   created: function created() {
     var that = this;
     //this.geocoder("深圳");
     //获取用户信息
     wx.getSetting({
       success: function success(res) {
-        if (res.authSetting["scope.userInfo"]) {
-          // wx.getUserInfo({
-          //   lang: "zh_CN",
-          //   withCredentials: true,
-          //   success: function(res) {
-          //     //console.log(res.userInfo);
-          //     wx.setStorage({ key: "userInfo", data: res.userInfo });
-          //     //用户已经授权过
-          //   }
-          // });
-        } else {
+        if (res.authSetting["scope.userInfo"]) {} else {
           console.log("用户还未授权过");
         }
       }
@@ -489,12 +517,29 @@ var app = getApp();
         }
       }
     });
+  },
+
+  onPullDownRefresh: function onPullDownRefresh() {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    var that = this;
+    wx.getLocation({
+      success: function success(res) {
+        console.log(res);
+        that.init({ location: res.longitude + "," + res.latitude });
+      }
+    });
+    //模拟加载
+    // setTimeout(function() {
+    //   // complete
+    //   wx.hideNavigationBarLoading(); //完成停止加载
+    //   wx.stopPullDownRefresh(); //停止下拉刷新
+    // }, 500);
   }
 });
 
 /***/ }),
 
-/***/ 92:
+/***/ 95:
 /***/ (function(module, exports) {
 
 /**
@@ -867,7 +912,7 @@ module.exports.BMapWX = BMapWX;
 
 /***/ }),
 
-/***/ 93:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -880,6 +925,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "bgImg",
     attrs: {
       "src": _vm.bgPath,
+      "mode": "widthFix",
       "alt": ""
     }
   })]), _vm._v(" "), _c('div', {
@@ -1023,7 +1069,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         lineHeight: _vm.fsize + 10 + 'rpx'
       })
     }, [_vm._v(_vm._s(item.des))])], 1)
-  }))], 1)]), _vm._v(" "), _c('button', {
+  }))], 1), _vm._v(" "), _c('view', {
+    staticClass: "carDesc carDesc1"
+  }, [_c('button', {
+    staticClass: "share",
+    style: ({
+      fontSize: _vm.fsize + 'rpx'
+    }),
+    attrs: {
+      "id": "shareBtn",
+      "open-type": "share",
+      "hover-class": "other-button-hover"
+    }
+  }, [_vm._v("\n            分享给好友\n          ")])], 1)]), _vm._v(" "), _c('button', {
     attrs: {
       "open-type": "getUserInfo",
       "lang": "zh_CN",
@@ -1051,7 +1109,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "touchend": _vm.endTouch
     }
   }, [_c('img', {
-    staticClass: "coin positionA",
+    staticClass: "coin positionA transition1",
     class: {
       showIcon: _vm.showIcon
     },
@@ -1068,7 +1126,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "tap": _vm.gotosetting
     }
   }), _vm._v(" "), _c('img', {
-    staticClass: "coin positionA",
+    staticClass: "coin positionA transition2",
     class: {
       showIcon: _vm.showIcon
     },
@@ -1085,7 +1143,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "tap": _vm.gotoabout
     }
   }), _vm._v(" "), _c('img', {
-    staticClass: "coin positionA",
+    staticClass: "coin positionA transition3",
     class: {
       showIcon: _vm.showIcon
     },
@@ -1122,5 +1180,5 @@ if (false) {
 
 /***/ })
 
-},[88]);
+},[91]);
 //# sourceMappingURL=main.js.map

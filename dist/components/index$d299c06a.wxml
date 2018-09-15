@@ -1,7 +1,7 @@
 <template name="index$d299c06a">
   <view class="_div data-v-992de0b4 container">
     <view class="_div data-v-992de0b4 bg">
-      <image src="{{bgPath}}" alt class="_img data-v-992de0b4 bgImg"></image>
+      <image src="{{bgPath}}" mode="widthFix" alt class="_img data-v-992de0b4 bgImg"></image>
     </view>
     <view class="_div data-v-992de0b4 con">
       <view class="_div data-v-992de0b4 header">
@@ -46,12 +46,15 @@
               </view>
             </view>
           </view>
+          <view class="_view data-v-992de0b4 carDesc carDesc1">
+            <button class="_button data-v-992de0b4 share" id="shareBtn" open-type="share" hover-class="other-button-hover" style=" {{('font-size:' + (fsize + 'rpx') + ';')}}"> 分享给好友 </button>
+          </view>
         </view>
         <button bindgetuserinfo="handleProxy" open-type="getUserInfo" lang="zh_CN" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_button data-v-992de0b4">
           <view class="_div data-v-992de0b4 navBar" bindtap="handleProxy" bindtouchstart="handleProxy" catchtouchmove="handleProxy" bindtouchend="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}" style=" {{('top:' + navTop + ';' + 'left:' + navLeft + ';')}}">
-            <image src="/static/img/setting.png" class="_img data-v-992de0b4 coin positionA {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'1'}}" data-comkey="{{$k}}" style=" {{('left:' + (0 + 'px') + ';' + 'top:' + (menuCoinTop * 1.42 + 'px') + ';')}}"></image>
-            <image src="/static/img/more.png" class="_img data-v-992de0b4 coin positionA {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'2'}}" data-comkey="{{$k}}" style=" {{('left:' + (menuCoinLeft + 'px') + ';' + 'top:' + (menuCoinTop + 'px') + ';')}}"></image>
-            <image src="/static/img/info.png" class="_img data-v-992de0b4 coin positionA {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'3'}}" data-comkey="{{$k}}" style=" {{('left:' + (menuCoinLeft * 1.42 + 'px') + ';' + 'top:' + (0 + 'px') + ';')}}"></image>
+            <image src="/static/img/setting.png" class="_img data-v-992de0b4 coin positionA transition1 {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'1'}}" data-comkey="{{$k}}" style=" {{('left:' + (0 + 'px') + ';' + 'top:' + (menuCoinTop * 1.42 + 'px') + ';')}}"></image>
+            <image src="/static/img/more.png" class="_img data-v-992de0b4 coin positionA transition2 {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'2'}}" data-comkey="{{$k}}" style=" {{('left:' + (menuCoinLeft + 'px') + ';' + 'top:' + (menuCoinTop + 'px') + ';')}}"></image>
+            <image src="/static/img/info.png" class="_img data-v-992de0b4 coin positionA transition3 {{[showIcon ? 'showIcon' : '']}}" bindtap="handleProxy" alt data-eventid="{{'3'}}" data-comkey="{{$k}}" style=" {{('left:' + (menuCoinLeft * 1.42 + 'px') + ';' + 'top:' + (0 + 'px') + ';')}}"></image>
             <image src="/static/img/menu.png" class="_img data-v-992de0b4 coin positionR" alt></image>
           </view>
         </button>

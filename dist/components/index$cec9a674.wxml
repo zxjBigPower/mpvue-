@@ -17,34 +17,37 @@
         <block wx:key="index" key="{{index}}" wx:for="{{bannerImgList}}" wx:for-index="index" wx:for-item="item">
           <swiper-item class="_swiper-item data-v-955dc6be">
             <view class="_view data-v-955dc6be info" data-index="{{index}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}">
-              <image src="{{item}}" class="_img data-v-955dc6be"></image>
-              <view class="_view data-v-955dc6be name">还没起名字的一款天气预报</view>
+              <image src="{{item}}" mode="widthFix" class="_img data-v-955dc6be"></image>
             </view>
           </swiper-item>
         </block>
       </swiper>
+      <view style="text-align:center" class="_view data-v-955dc6be name">巴啦啦小魔仙</view>
       <view class="_view data-v-955dc6be feedback item">
         <view class="_view data-v-955dc6be title">建议 & 意见反馈</view>
         <view class="_view data-v-955dc6be i" catchtap="copy" data-title="GitHub" data-content="{{github}}"> 对不起，您的意见我一定会听，但肯定不会改，哈哈哈~~~ </view>
         <view class="_view data-v-955dc6be i">
           <image src="/static/img/wechat.png" class="_img data-v-955dc6be"></image>
-          <view class="_view data-v-955dc6be text">微信快速联系</view>
+          <view class="_view data-v-955dc6be text">微信快速联系（欢迎吐槽）</view>
           <button open-type="contact" class="_button data-v-955dc6be btn">联系我们</button>
         </view>
       </view>
       <view class="_view data-v-955dc6be thanks item">
         <view class="_view data-v-955dc6be title">鸣谢</view>
         <view class="_view data-v-955dc6be i">
+          <image src="/static/img/location_grey.png" class="_img data-v-955dc6be"></image>
           <view class="_view data-v-955dc6be text">地理编码：百度地图开放平台</view>
         </view>
         <view class="_view data-v-955dc6be i">
+          <image src="/static/img/weather.png" class="_img data-v-955dc6be"></image>
           <view class="_view data-v-955dc6be text">天气数据来源：百度地图开放平台</view>
         </view>
       </view>
       <view class="_view data-v-955dc6be attention item">
         <view class="_view data-v-955dc6be title">注意事项</view>
         <view class="_view data-v-955dc6be i">
-          <view class="_view data-v-955dc6be text">还没起名字的一款天气预报小程序（复刻版）的数据均存储在本地，没有账号体系，没有数据同步功能，若清空微信相关数据可能会造成数据（首页缓存数据、首页悬浮球位置信息、设置）丢失（看个天气而已，何必纠结）。</view>
+          <image src="/img/location_grey.png" class="_image data-v-955dc6be"></image>
+          <view class="_view data-v-955dc6be text">还没起名字的一款天气预报小程序（没朋友复刻版）的数据均存储在本地，没有账号体系，没有数据同步功能，若清空微信相关数据可能会造成数据（首页缓存数据、首页悬浮球位置信息、设置）丢失（看个天气而已，何必纠结）。</view>
         </view>
       </view>
       <view class="_view data-v-955dc6be attention item">
